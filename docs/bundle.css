@@ -1,0 +1,26 @@
+* {
+  box-sizing: border-box; }
+
+html {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 16px;
+  -ms-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%; }
+
+body {
+  background: #fff;
+  color: #747474;
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale; }
+
+::selection {
+  background: #49ff40;
+  color: #fff; }
+
+nav {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  padding: 10px 30px;
+  background: red; }
