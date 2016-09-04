@@ -5,7 +5,8 @@
   "main": "fx.js",
   "scripts": {
     "test": "rollup test/test.js | node",
-    "build": "bin/build.sh"
+    "build": "bin/build.sh",
+    "prepublish": "npm run build"
   },
   "repository": {
     "type": "git",
@@ -21,9 +22,6 @@
     "url": "https://github.com/elfet/fx/issues"
   },
   "homepage": "https://github.com/elfet/fx#readme",
-  "engines": {
-    "node": ">=6.0"
-  },
   "babel": {
     "presets": [
       "es2015"
