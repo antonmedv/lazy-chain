@@ -10,3 +10,11 @@ npm install fx
 * **Generators** support
 * Function **composition**
 * **Lazy** evaluation
+
+
+### Supports
+
+* `fx`: Chrome 39, Firefox 26, Edge 13, Node 6.x
+* `fx/shim`: IE 9.x, Safari 9.x, Node 4.x
+
+
