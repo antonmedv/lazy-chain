@@ -1,0 +1,160 @@
+/* Define some variables used in multiple places */
+$background: #2b303b;
+$foreground: #f0f1f5;
+
+/* Code Styling */
+.cm-s-spacegrey {
+  .CodeMirror, .CodeMirror-scroll {
+    background-color: $background;
+    color: $foreground;
+  }
+
+  .CodeMirror-focused .CodeMirror-activeline-background {
+    background: $background;
+  }
+
+  .show-line-padding .CodeMirror-focused .CodeMirror-activeline-background {
+    box-shadow: inset 15px 0 0 0 #000;
+  }
+
+  .CodeMirror-focused .CodeMirror-activeline {
+    .CodeMirror-gutter-elt {
+      background: rgba(52, 61, 70, 1);
+      color: #767676;
+    }
+    .inline-widget .CodeMirror-gutter-elt {
+      color: #767676;
+    }
+  }
+
+  .cm-atom, .cm-string, .cm-string-2, .cm-hr {
+    color: #9dbe8c;
+  }
+
+  .cm-number, .cm-attribute, .cm-plus {
+    color: #d08770;
+  }
+
+  .cm-def {
+    color: $foreground;
+  }
+
+  .cm-variable, .cm-variable-2, .cm-operator, .cm-meta, .cm-bracket {
+    color: $foreground !important;
+  }
+
+  .cm-comment {
+    color: #576670;
+  }
+
+  .cm-error, .cm-minus {
+    background: rgba(207, 59, 60, 0.2);
+    color: #cf3b3c;
+  }
+
+  .cm-header {
+    color: #d85896;
+  }
+
+  .cm-link {
+    color: #b77fdb;
+    text-decoration: none;
+  }
+
+  .cm-rangeinfo {
+    color: #6c71c4;
+  }
+
+  .cm-builtin, .cm-quote {
+    color: #e8c884;
+  }
+
+  .cm-qualifier {
+    color: #d08770;
+  }
+
+  .cm-keyword {
+    color: #b48ead;
+  }
+
+  .cm-tag {
+    color: #bf616a;
+  }
+
+  .cm-property {
+    color: #90b0ae;
+  }
+
+  .cm-variable-3 {
+    color: #d08770;
+  }
+
+  .CodeMirror-searching {
+    background-color: #d3cd69;
+    &.searching-current-match {
+      background-color: #f6a644;
+    }
+  }
+
+  .CodeMirror-cursor {
+    border-left: 1px solid #c5c8c6 !important;
+  }
+
+  .CodeMirror-gutters {
+    background-color: $background;
+    border-right: none;
+  }
+
+  .CodeMirror-linenumber {
+    color: #767676;
+  }
+
+  .CodeMirror .CodeMirror-selected {
+    background: #333f48;
+  }
+
+  .CodeMirror-focused .CodeMirror-selected {
+    background: #47535e;
+  }
+
+  .CodeMirror-matchingbracket, .CodeMirror-matchingtag {
+    background-color: rgba(240, 241, 245, 0.2);
+    color: $foreground !important;
+  }
+
+  .CodeMirror-overwrite .CodeMirror-cursor {
+    border-left: none !important;
+    border-bottom: 1px solid #fff;
+  }
+
+  .CodeMirror {
+    .CodeMirror {
+      background: transparent;
+    }
+
+    .CodeMirror .CodeMirror-gutters {
+      background: transparent;
+      border-right: none;
+    }
+
+    .CodeMirror .CodeMirror-activeline-background {
+      background: transparent;
+    }
+
+    .CodeMirror .CodeMirror-activeline .CodeMirror-gutter-elt {
+      background: transparent;
+      color: #767676;
+    }
+
+    .CodeMirror-focused .CodeMirror-activeline-background {
+      background: #2f2f2f;
+    }
+
+    .CodeMirror-focused .CodeMirror-activeline {
+      .CodeMirror-gutter-elt {
+        background: rgba(0, 0, 0, 0.2);
+        color: #fff;
+      }
+    }
+  }
+}

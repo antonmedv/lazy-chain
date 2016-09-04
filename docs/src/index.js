@@ -1,8 +1,10 @@
 "use strict";
 require('./style.scss');
 require('codemirror/lib/codemirror.css');
-const {fx, range} = require('fx/shim');
+require('./spacegrey.scss');
+require('codemirror/mode/javascript/javascript');
 const CodeMirror = require('codemirror');
+const {fx, range} = require('fx/shim');
 
 function isIterable(obj) {
   if (obj == null) { // checks for null and undefined
@@ -19,8 +21,14 @@ const runNode = document.querySelector('#run');
 const mirror = CodeMirror(inputNode, {
   lineNumbers: true,
   mode: 'javascript',
+  theme: 'spacegrey',
   tabSize: 2
 });
+
+try {
+  mirror.setValue(localStorage.getItem('repl_code'));
+} catch (e) {
+}
 
 runNode.addEventListener('click', function (event) {
   event.preventDefault();
@@ -43,6 +51,11 @@ runNode.addEventListener('click', function (event) {
 
   try {
     let code = mirror.getValue();
+
+    try {
+      localStorage.setItem('repl_code', mirror.getValue());
+    } catch (e) {
+    }
 
     code = `
       const result = do {
