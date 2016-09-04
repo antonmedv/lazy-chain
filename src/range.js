@@ -9,7 +9,7 @@ import { Chain } from './chain';
  */
 export function range(start = 0, end = Infinity, step = 1) {
   const iterator = (function*() {
-    for (let i = start; i < end; i += step) {
+    for (let i = start; i <= end; i += step) {
       yield i;
     }
   })();
