@@ -1,7 +1,7 @@
 "use strict";
 require('./style.scss');
 require('codemirror/lib/codemirror.css');
-require('./spacegrey.scss');
+//require('./spacegrey.scss');
 require('codemirror/mode/javascript/javascript');
 const CodeMirror = require('codemirror');
 const {fx, range} = require('fx/shim');
@@ -21,7 +21,7 @@ const runNode = document.querySelector('#run');
 const mirror = CodeMirror(inputNode, {
   lineNumbers: true,
   mode: 'javascript',
-  theme: 'spacegrey',
+  theme: 'default',
   tabSize: 2
 });
 
