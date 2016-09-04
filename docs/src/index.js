@@ -1,6 +1,8 @@
 "use strict";
 require('./style.scss');
+require('codemirror/lib/codemirror.css');
 const {fx, range} = require('fx/shim');
+const CodeMirror = require('codemirror');
 
 function isIterable(obj) {
   if (obj == null) { // checks for null and undefined
@@ -9,25 +11,25 @@ function isIterable(obj) {
   return typeof obj[Symbol.iterator] === 'function';
 }
 
-const input = document.querySelector('textarea');
-const result = document.querySelector('.result');
-const error = document.querySelector('.error');
-const run = document.querySelector('#run');
+const inputNode = document.querySelector('.input');
+const outputNode = document.querySelector('.output');
+const errorNode = document.querySelector('.error');
+const runNode = document.querySelector('#run');
 
-run.addEventListener('click', function () {
-  let code = input.value;
-  let px = code.split('\n');
+const mirror = CodeMirror(inputNode, {
+  lineNumbers: true,
+  mode: 'javascript',
+  tabSize: 2
+});
 
-  if (px.length > 0) {
-    px[px.length - 1] = `console.dump(${px[px.length - 1]});`;
-    code = px.join('\n');
-  }
+runNode.addEventListener('click', function (event) {
+  event.preventDefault();
 
-  const output = [];
+  const log = [];
   const logger = {
     log(...args) {
       for (let v of args) {
-        output.push(JSON.stringify(v));
+        log.push(JSON.stringify(v));
       }
     },
     dump(arg) {
@@ -40,13 +42,36 @@ run.addEventListener('click', function () {
   };
 
   try {
-    code = Babel.transform(code, {presets: ['es2015']}).code;
-    new Function('fx', 'range', 'console', code)(fx, range, logger);
+    let code = mirror.getValue();
+
+    code = `
+      const result = do {
+        ${code}
+      };
+    `;
+    code = Babel.transform(code, {presets: ['es2015', 'stage-0']}).code;
+    code = `
+      ${code}
+      return result;
+    `;
+
+    let output = new Function('fx', 'range', 'console', code)(fx, range, logger);
+
+    logger.dump(output);
   } catch (e) {
-    error.textContent = e.toString();
+    errorNode.textContent = e.toString();
+    errorNode.style.display = 'block';
     return;
   }
 
-  error.textContent = '';
-  result.textContent = output;
+  errorNode.style.display = 'none';
+  errorNode.textContent = '';
+
+  outputNode.textContent = '';
+  for (let line of log) {
+    let node = document.createElement('div');
+    node.className = 'line';
+    node.textContent = line;
+    outputNode.appendChild(node);
+  }
 });
