@@ -35,9 +35,10 @@ export class Chain {
    * @returns {Chain}
    */
   chunk(n) {
-    let i = 0;
-    let acc = [];
     return this.apply(function*(iterator) {
+      let i = 0;
+      let acc = [];
+
       for (let value of iterator) {
         acc.push(value);
         if (++i >= n) {
@@ -46,6 +47,7 @@ export class Chain {
           i = 0;
         }
       }
+
       if (acc.length > 0) {
         yield acc;
       }
@@ -53,8 +55,9 @@ export class Chain {
   }
 
   drop(n = 1) {
-    let i = 0;
     return this.apply(function *(iterator) {
+      let i = 0;
+
       for (let value of iterator) {
         if (i++ >= n) {
           yield value;
