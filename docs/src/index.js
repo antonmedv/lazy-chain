@@ -1,10 +1,12 @@
 "use strict";
 require('./style.scss');
 const {fx, range} = require('fx/shim');
-const Babel = require('babel-standalone');
 
-for (let i of range(1).tail().filter(x => x % 137 == 0).take(1)) {
-  console.log(i);
+function isIterable(obj) {
+  if (obj == null) { // checks for null and undefined
+    return false;
+  }
+  return typeof obj[Symbol.iterator] === 'function';
 }
 
 const input = document.querySelector('textarea');
@@ -29,7 +31,7 @@ run.addEventListener('click', function () {
       }
     },
     dump(arg) {
-      if (arg[Symbol.iterator]) {
+      if (isIterable(arg)) {
         this.log([...arg]);
       } else {
         this.log(arg);
