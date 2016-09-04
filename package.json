@@ -1,18 +1,19 @@
 {
   "name": "fx",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "Fx is a JavaScript utility library for ES6",
-  "main": "dist/index.js",
+  "main": "fx.js",
   "scripts": {
     "test": "rollup test.js | node",
-    "build": "rollup src/index.js --output dist/index.js --format cjs"
+    "build": "bin/build.sh"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/elfet/fx.git"
   },
   "keywords": [
-    "fx", "utility"
+    "fx",
+    "utility"
   ],
   "author": "Anton Medvedev <anton@medv.io>",
   "license": "MIT",
@@ -23,7 +24,17 @@
   "engines": {
     "node": ">=6.0"
   },
+  "babel": {
+    "presets": [
+      "es2015"
+    ]
+  },
   "devDependencies": {
-    "rollup": "^0.34.13"
+    "babel-cli": "^6.14.0",
+    "babel-preset-es2015": "^6.14.0",
+    "regenerator-runtime": "^0.9.5",
+    "rollup": "^0.34.13",
+    "uglify-js": "^2.7.3",
+    "webpack": "^1.13.2"
   }
 }

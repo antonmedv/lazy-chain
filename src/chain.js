@@ -1,8 +1,5 @@
-'use strict';
+"use strict";
 
-/**
- * @method {Chain} filter
- */
 export class Chain {
   /**
    * @param {Iterable} iterator
@@ -142,6 +139,9 @@ export class Chain {
     });
   }
 
+  /**
+   * @returns {Chain}
+   */
   zip() {
     return this.apply(function*(iterator) {
       const values = [...iterator];
