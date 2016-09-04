@@ -13,6 +13,10 @@ function isIterable(obj) {
   return typeof obj[Symbol.iterator] === 'function';
 }
 
+function isString(x) {
+  return Object.prototype.toString.call(x) === "[object String]"
+}
+
 const inputNode = document.querySelector('.input');
 const outputNode = document.querySelector('.output');
 const errorNode = document.querySelector('.error');
@@ -32,13 +36,20 @@ try {
 
 runNode.addEventListener('click', function (event) {
   event.preventDefault();
+  outputNode.textContent = '';
 
-  const log = [];
   const logger = {
     log(...args) {
-      for (let v of args) {
-        log.push(JSON.stringify(v));
+      let line = [];
+
+      for (let value of args) {
+        line.push(isString(value) ? value : JSON.stringify(value));
       }
+
+      let node = document.createElement('div');
+      node.className = 'line';
+      node.textContent = line.join('');
+      outputNode.appendChild(node);
     },
     dump(arg) {
       if (isIterable(arg)) {
@@ -79,12 +90,4 @@ runNode.addEventListener('click', function (event) {
 
   errorNode.style.display = 'none';
   errorNode.textContent = '';
-
-  outputNode.textContent = '';
-  for (let line of log) {
-    let node = document.createElement('div');
-    node.className = 'line';
-    node.textContent = line;
-    outputNode.appendChild(node);
-  }
 });
