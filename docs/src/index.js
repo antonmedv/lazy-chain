@@ -68,11 +68,7 @@ runNode.addEventListener('click', function (event) {
     } catch (e) {
     }
 
-    code = `
-      const result = do {
-        ${code}
-      };
-    `;
+    code = `const result = do {${code}};`;
     code = Babel.transform(code, {presets: ['es2015', 'stage-0']}).code;
     code = `
       ${code}
