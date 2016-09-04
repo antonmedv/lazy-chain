@@ -4,7 +4,7 @@
   "description": "Fx is a JavaScript utility library for ES6",
   "main": "fx.js",
   "scripts": {
-    "test": "rollup test.js | node",
+    "test": "rollup test/test.js | node",
     "build": "bin/build.sh"
   },
   "repository": {

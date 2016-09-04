@@ -1,4 +1,7 @@
 /node_modules/
+/docs/
 /test/
 /src/
+/bin/
 .gitignore
+.npmignore
