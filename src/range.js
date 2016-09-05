@@ -1,5 +1,5 @@
 "use strict";
-import { Chain } from './chain';
+import {Chain} from './chain';
 
 /**
  * @param {Number} start

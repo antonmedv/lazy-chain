@@ -1,5 +1,19 @@
 "use strict";
+import {
+  chunk,
+  drop,
+  filter,
+  map,
+  tail,
+  take,
+  reverse,
+  sort,
+  zip
+} from './func';
 
+/**
+ * @method {Chain} top
+ */
 export class Chain {
   /**
    * @param {Iterable} iterator
@@ -20,12 +34,12 @@ export class Chain {
   }
 
   /**
-   * @param {Generator[]} fns
+   * @param {Generator} fn
    * @returns {Chain}
    */
-  compose(...fns) {
-    for (let fn of fns) {
-      this.iterator = fn(this.iterator);
+  compose(...fn) {
+    for (let f of fn) {
+      this.iterator = f(this.iterator);
     }
     return this;
   }
@@ -35,35 +49,15 @@ export class Chain {
    * @returns {Chain}
    */
   chunk(n) {
-    return this.apply(function*(iterator) {
-      let i = 0;
-      let acc = [];
-
-      for (let value of iterator) {
-        acc.push(value);
-        if (++i >= n) {
-          yield acc;
-          acc = [];
-          i = 0;
-        }
-      }
-
-      if (acc.length > 0) {
-        yield acc;
-      }
-    });
+    return this.apply(chunk(n));
   }
 
+  /**
+   * @param {Number} n
+   * @returns {Chain}
+   */
   drop(n = 1) {
-    return this.apply(function *(iterator) {
-      let i = 0;
-
-      for (let value of iterator) {
-        if (i++ >= n) {
-          yield value;
-        }
-      }
-    });
+    return this.apply(drop(n));
   }
 
   /**
@@ -71,13 +65,7 @@ export class Chain {
    * @returns {Chain}
    */
   filter(fn) {
-    return this.apply(function*(iterator) {
-      for (let value of iterator) {
-        if (fn(value)) {
-          yield value;
-        }
-      }
-    });
+    return this.apply(filter(fn));
   }
 
   /**
@@ -88,22 +76,18 @@ export class Chain {
   }
 
   /**
-   * @returns {Chain}
-   */
-  tail() {
-    return this.drop(1);
-  }
-
-  /**
    * @param {Function} fn
    * @returns {Chain}
    */
   map(fn) {
-    return this.apply(function*(iterator) {
-      for (let value of iterator) {
-        yield fn(value);
-      }
-    });
+    return this.apply(map(fn));
+  }
+
+  /**
+   * @returns {Chain}
+   */
+  tail() {
+    return this.apply(tail);
   }
 
   /**
@@ -111,25 +95,14 @@ export class Chain {
    * @returns {Chain}
    */
   take(count) {
-    return this.apply(function*(iterator) {
-      let i = 0;
-      for (let value of iterator) {
-        if (i++ < count) {
-          yield value;
-        } else {
-          return;
-        }
-      }
-    });
+    return this.apply(take(count));
   }
 
   /**
    * @returns {Chain}
    */
   reverse() {
-    return this.apply(function*(iterator) {
-      yield* [...iterator].reverse();
-    });
+    return this.apply(reverse);
   }
 
   /**
@@ -137,25 +110,14 @@ export class Chain {
    * @returns {Chain}
    */
   sort(fn = null) {
-    return this.apply(function*(iterator) {
-      yield* [...iterator].sort(fn);
-    });
+    return this.apply(sort(fn));
   }
 
   /**
    * @returns {Chain}
    */
   zip() {
-    return this.apply(function*(iterator) {
-      const values = [...iterator];
-      const length = Math.max(...values.map(x => x.length));
-
-      for (let i = 0; i < length; i++) {
-        yield values
-          .map(x => x[i])
-          .filter(x => x !== undefined && x !== null);
-      }
-    })
+    return this.apply(zip)
   }
 
   /**

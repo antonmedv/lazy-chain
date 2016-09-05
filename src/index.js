@@ -1,9 +1,11 @@
 "use strict";
-import { Chain } from './chain';
-export { range } from './range';
+import {Chain} from './chain';
+export {range} from './range';
+export {compose} from './compose';
+export * from './func';
 
 /**
- * @param {*} params
+ * @param params
  * @returns {Chain}
  */
 export function fx(...params) {
