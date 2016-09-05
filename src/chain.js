@@ -25,6 +25,47 @@ export class Chain {
   }
 
   /**
+   * @returns {Iterable}
+   */
+  [Symbol.iterator]() {
+    return this.iterator;
+  }
+
+  /**
+   * @param {Function} fn
+   */
+  forEach(fn) {
+    for (let value of this.iterator) {
+      fn(value);
+    }
+  }
+
+  /**
+   * @returns {Array}
+   */
+  toArray() {
+    const array = [];
+
+    for (let value of this.iterator) {
+      array.push(value);
+    }
+
+    return array;
+  }
+
+  /**
+   * @returns {*}
+   */
+  head() {
+    return this.iterator.next().value;
+  }
+
+
+  /**************************************
+   *        Chainable methods           *
+   **************************************/
+
+  /**
    * @param {Function|Generator} fn
    * @returns {Chain}
    */
@@ -66,13 +107,6 @@ export class Chain {
    */
   filter(fn) {
     return this.apply(filter(fn));
-  }
-
-  /**
-   * @returns {*}
-   */
-  head() {
-    return this.iterator.next().value;
   }
 
   /**
@@ -118,34 +152,5 @@ export class Chain {
    */
   zip() {
     return this.apply(zip)
-  }
-
-  /**
-   * @returns {Iterable}
-   */
-  [Symbol.iterator]() {
-    return this.iterator;
-  }
-
-  /**
-   * @param {Function} fn
-   */
-  forEach(fn) {
-    for (let value of this.iterator) {
-      fn(value);
-    }
-  }
-
-  /**
-   * @returns {Array}
-   */
-  toArray() {
-    const array = [];
-
-    for (let value of this.iterator) {
-      array.push(value);
-    }
-
-    return array;
   }
 }
