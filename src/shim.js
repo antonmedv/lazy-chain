@@ -1,5 +1,3 @@
-import 'regenerator-runtime/runtime';
-
 if (typeof Symbol !== 'function') {
   const Symbol = Object.create(null);
   Object.defineProperty(Symbol, 'iterator', {

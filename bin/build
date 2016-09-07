@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 
+# Cleanup
+rm fx.js shim.js 2>/dev/null
+
 # Build ES6 package
 if [ "$1" == "--dev" ]; then
     rollup src/index.js --output fx.js --format cjs --sourcemap inline
@@ -10,5 +13,6 @@ fi
 # Build shim version
 rollup src/shim.js --output shim.js --format cjs &&
 babel shim.js -o shim.js &&
+echo -e "var regeneratorRuntime = require('regenerator-runtime/runtime');\n$(cat shim.js)" > shim.js && # temp hack, transform-regenerator does not working
 webpack shim.js shim.js --output-library-target umd &&
-uglifyjs --output shim.js --compress --mangle --screw-ie8 -- shim.js
+uglifyjs --output shim.js --compress --mangle --screw-ie8 --noerr -- shim.js
