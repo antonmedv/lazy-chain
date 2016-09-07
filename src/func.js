@@ -1,5 +1,3 @@
-"use strict";
-
 /**
  * @param {Number} n
  * @returns {Generator}

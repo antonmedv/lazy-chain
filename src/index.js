@@ -1,4 +1,3 @@
-"use strict";
 import {Chain} from './chain';
 export {range} from './range';
 export {compose} from './compose';

@@ -1,7 +1,10 @@
 /node_modules/
+/coverage/
+/.nyc_output/
 /docs/
 /test/
 /src/
 /bin/
 .gitignore
 .npmignore
+npm-debug.log

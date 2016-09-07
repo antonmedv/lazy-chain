@@ -1,7 +1,11 @@
 #!/usr/bin/env bash
 
 # Build ES6 package
-rollup src/index.js --output fx.js --format cjs
+if [ "$1" == "--dev" ]; then
+    rollup src/index.js --output fx.js --format cjs --sourcemap inline
+else
+    rollup src/index.js --output fx.js --format cjs
+fi
 
 # Build shim version
 rollup src/shim.js --output shim.js --format cjs &&

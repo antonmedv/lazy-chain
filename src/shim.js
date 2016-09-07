@@ -1,4 +1,3 @@
-"use strict";
 import 'regenerator-runtime/runtime';
 
 if (typeof Symbol !== 'function') {

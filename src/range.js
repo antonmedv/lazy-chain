@@ -1,4 +1,3 @@
-"use strict";
 import {Chain} from './chain';
 
 /**
