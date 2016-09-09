@@ -69,3 +69,15 @@ test('compose generators', t => {
     [ -2, -4, -6, -8, -10 ]
   );
 });
+
+test('length', t => {
+  t.is(fx().length, 0);
+  t.is(fx(1, 2).length, 2);
+
+  t.is(fx([]).length, 0);
+  t.is(fx([1]).length, 1);
+  t.is(fx([1, 2]).length, 2);
+
+
+  t.is(range(1, 10).filter(x => x % 2 == 0).length, 5);
+});

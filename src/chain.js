@@ -60,6 +60,12 @@ export class Chain {
     return this.iterator.next().value;
   }
 
+  /**
+   * @returns {Number}
+   */
+  get length() {
+    return [...this].length;
+  }
 
   /**************************************
    *        Chainable methods           *
