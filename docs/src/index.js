@@ -39,21 +39,22 @@ runNode.addEventListener('click', function (event) {
   outputNode.textContent = '';
 
   const logger = {
-    log(...args) {
+    log() {
+      let args = Array.prototype.slice.call(arguments);
       let line = [];
 
-      for (let value of args) {
+      args.forEach(value => {
         line.push(isString(value) ? value : JSON.stringify(value));
-      }
+      });
 
       let node = document.createElement('div');
       node.className = 'line';
-      node.textContent = line.join('');
+      node.textContent = line.join(String.fromCharCode(8201));
       outputNode.appendChild(node);
     },
     dump(arg) {
       if (isIterable(arg)) {
-        this.log([...arg]);
+        this.log(fx(arg).toArray());
       } else {
         this.log(arg);
       }
@@ -65,8 +66,7 @@ runNode.addEventListener('click', function (event) {
 
     try {
       localStorage.setItem('repl_code', mirror.getValue());
-    } catch (e) {
-    }
+    } catch (e) {}
 
     code = `const result = do {${code}};`;
     code = Babel.transform(code, {presets: ['es2015', 'stage-0']}).code;
