@@ -1,6 +1,6 @@
 {
   "name": "fx",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Fx is a JavaScript utility library for ES6",
   "main": "fx.js",
   "scripts": {
