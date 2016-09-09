@@ -1,17 +1,23 @@
 language: node_js
 sudo: false
-env:
-  - CXX=g++-4.8
 matrix:
   include:
   - node_js: "6"
-    env: USE_SHIM=false
+    env:
+    - USE_SHIM=false
+    - CXX=g++-4.8
   - node_js: "6"
-    env: USE_SHIM=true
+    env:
+    - USE_SHIM=true
+    - CXX=g++-4.8
   - node_js: "5"
-    env: USE_SHIM=true
+    env:
+    - USE_SHIM=true
+    - CXX=g++-4.8
   - node_js: "4"
-    env: USE_SHIM=true
+    env:
+    - USE_SHIM=true
+    - CXX=g++-4.8
 install:
   - npm install
 script:
