@@ -25,6 +25,20 @@ test('zip n arrays', t => {
 test('zip not equal size arrays', t => {
   t.deepEqual(
     fx([['a', 'b', 'c', 'd', 'f'], [1, 2, 3]]).zip().toArray(),
-    [["a", 1], ["b", 2], ["c", 3], ["d"], ["f"]]
+    [["a", 1], ["b", 2], ["c", 3]]
+  );
+});
+
+test('zip two fx', t => {
+  t.deepEqual(
+    fx(fx(1, 2, 3, 4), fx(9, 8, 7, 6)).zip().toArray(),
+    [[1, 9], [2, 8], [3, 7], [4, 6]]
+  );
+});
+
+test('zip fx and array', t => {
+  t.deepEqual(
+    fx(fx(1, 2, 3, 4), [9, 8, 7, 6]).zip().toArray(),
+    [[1, 9], [2, 8], [3, 7], [4, 6]]
   );
 });

@@ -1,3 +1,5 @@
+import {compose} from './compose';
+
 /**
  * @param {Number} n
  * @returns {Generator}
@@ -77,11 +79,11 @@ export const take = (count) => function*(iterator) {
 };
 
 /**
- * @param {Iterable} iterator
+ * @returns {Generator}
  */
-export function* reverse(iterator) {
+export const reverse = function*(iterator) {
   yield* [...iterator].reverse();
-}
+};
 
 /**
  * @param {Function} fn
@@ -93,15 +95,24 @@ export const sort = (fn = null) => function*(iterator) {
 
 
 /**
- * @param {Iterable} iterator
+ * @returns {Generator}
  */
-export function* zip(iterator) {
-  const values = [...iterator];
-  const length = Math.max(...values.map(x => x.length));
+export const zip = function*(iterator) {
+  const values = [...iterator].map(x => [...x]);
+  const length = Math.min(...values.map(x => x.length));
 
   for (let i = 0; i < length; i++) {
     yield values
       .map(x => x[i])
       .filter(x => x !== undefined && x !== null);
   }
-}
+};
+
+/**
+ *
+ * @param fn
+ */
+export const zipWith = (fn) => compose(
+  zip,
+  map(x => fn(...x))
+);

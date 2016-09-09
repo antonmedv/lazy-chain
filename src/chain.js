@@ -7,7 +7,8 @@ import {
   take,
   reverse,
   sort,
-  zip
+  zip,
+  zipWith
 } from './func';
 
 /**
@@ -150,6 +151,14 @@ export class Chain {
    * @returns {Chain}
    */
   zip() {
-    return this.apply(zip)
+    return this.apply(zip);
+  }
+
+  /**
+   * @param {Function} fn
+   * @returns {Chain}
+   */
+  zipWith(fn) {
+    return this.apply(zipWith(fn));
   }
 }
