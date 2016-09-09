@@ -11,7 +11,7 @@ matrix:
   - node_js: "0.12.x"
     env: USE_SHIM=true
 install:
-  - npm install --dev
+  - npm install
 script:
   - bin/test
 after_success:
