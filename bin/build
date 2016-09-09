@@ -1,4 +1,6 @@
 #!/usr/bin/env bash
+set -e
+PATH=node_modules/.bin:$PATH
 
 # Cleanup
 rm fx.js shim.js 2>/dev/null
@@ -11,8 +13,10 @@ else
 fi
 
 # Build shim version
-rollup src/shim.js --output shim.js --format cjs &&
-babel shim.js -o shim.js &&
-echo -e "var regeneratorRuntime = require('regenerator-runtime/runtime');\n$(cat shim.js)" > shim.js && # temp hack, transform-regenerator does not working
-webpack shim.js shim.js --output-library-target umd &&
+rollup src/index.js --output shim.js --format cjs
+babel shim.js -o shim.js
+# temp hack, transform-regenerator does not working
+echo -e "var regeneratorRuntime = require('regenerator-runtime/runtime');\n$(cat shim.js)" > shim.js
+webpack shim.js shim.js --output-library-target umd
+echo -e "$(cat src/polyfill.js)\n$(cat shim.js)" > shim.js
 uglifyjs --output shim.js --compress --mangle --screw-ie8 --noerr -- shim.js

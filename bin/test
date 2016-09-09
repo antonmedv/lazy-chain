@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+set -e
+PATH=node_modules/.bin:$PATH
+
+# Build
+bin/build --dev
+
+# Test
+if [ "$USE_SHIM" == "true" ]; then
+    ln -sfn shim.js fx.js
+    ava
+else
+    nyc ava
+fi

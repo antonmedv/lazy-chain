@@ -4,12 +4,10 @@
   "description": "Fx is a JavaScript utility library for ES6",
   "main": "fx.js",
   "scripts": {
-    "test": "bin/build --dev && nyc ava",
-    "test:shim": "ln -sfn shim.js fx.js && ava",
+    "test": "bin/test",
     "report": "nyc report --reporter=html && open coverage/index.html",
     "codecov": "nyc report --reporter=lcov > coverage.lcov && codecov",
-    "build": "bin/build",
-    "prepublish": "npm run build"
+    "prepublish": "bin/build"
   },
   "repository": {
     "type": "git",

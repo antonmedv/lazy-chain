@@ -1,11 +1,18 @@
 language: node_js
 sudo: false
-node_js:
-  - "6"
+matrix:
+  include:
+  - node_js: "6"
+    env: USE_SHIM=false
+  - node_js: "5"
+    env: USE_SHIM=true
+  - node_js: "4"
+    env: USE_SHIM=true
+  - node_js: "0.12.x"
+    env: USE_SHIM=true
 install:
   - npm install --dev
 script:
-  - npm run test
-  - npm run test:shim
+  - bin/test
 after_success:
   - npm run codecov
