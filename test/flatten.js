@@ -14,3 +14,10 @@ test('flatten with strings', t => {
     [1, 2, 3, "str"]
   );
 });
+
+test('flatten with null', t => {
+  t.deepEqual(
+    fx([1, [[2, 3], null]]).flatten().toArray(),
+    [1, 2, 3, null]
+  );
+});
