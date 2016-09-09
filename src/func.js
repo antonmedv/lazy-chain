@@ -34,6 +34,22 @@ export const chunk = (n) => function*(iterator) {
 };
 
 /**
+ * @param {Iterator} iterator
+ */
+export const cycle = function*(iterator) {
+  const cache = [];
+
+  for (let value of iterator) {
+    yield value;
+    cache.push(value);
+  }
+
+  while (true) for (let value of cache) {
+    yield value;
+  }
+};
+
+/**
  * @param {Number} n
  * @returns {Generator}
  */

@@ -1,5 +1,6 @@
 import {
   chunk,
+  cycle,
   drop,
   filter,
   flatten,
@@ -105,6 +106,13 @@ export class Chain {
    */
   chunk(n) {
     return this.apply(chunk(n));
+  }
+
+  /**
+   * @returns {Chain}
+   */
+  cycle() {
+    return this.apply(cycle);
   }
 
   /**
