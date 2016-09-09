@@ -60,6 +60,19 @@ export const filter = (fn) => function*(iterator) {
 };
 
 /**
+ * @param {Iterator} iterator
+ */
+export const flatten = function*(iterator) {
+  for (let value of iterator) {
+    if (typeof value !== "string" && isIterable(value)) {
+      yield* fx(value).flatten();
+    } else {
+      yield value;
+    }
+  }
+};
+
+/**
  * @param {Function} fn
  * @returns {Generator}
  */

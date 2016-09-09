@@ -2,6 +2,7 @@ import {
   chunk,
   drop,
   filter,
+  flatten,
   map,
   tail,
   take,
@@ -120,6 +121,13 @@ export class Chain {
    */
   filter(fn) {
     return this.apply(filter(fn));
+  }
+
+  /**
+   * @returns {Chain}
+   */
+  flatten() {
+    return this.apply(flatten);
   }
 
   /**
