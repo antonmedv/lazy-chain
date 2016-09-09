@@ -32,6 +32,13 @@ export class Chain {
   }
 
   /**
+   * @returns {*}
+   */
+  next() {
+    return this.iterator.next();
+  }
+
+  /**
    * @param {Function} fn
    */
   forEach(fn) {

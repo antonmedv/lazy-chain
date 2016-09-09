@@ -1,4 +1,16 @@
+import {fx} from './index';
 import {compose} from './compose';
+
+/**
+ * @param {*} obj
+ * @returns {Boolean}
+ */
+function isIterable(obj) {
+  if (obj == null) {
+    return false;
+  }
+  return typeof obj[Symbol.iterator] === 'function';
+}
 
 /**
  * @param {Number} n
@@ -98,13 +110,22 @@ export const sort = (fn = null) => function*(iterator) {
  * @returns {Generator}
  */
 export const zip = function*(iterator) {
-  const values = [...iterator].map(x => [...x]);
-  const length = Math.min(...values.map(x => x.length));
+  const channels = [...iterator].map(x => fx(x));
 
-  for (let i = 0; i < length; i++) {
-    yield values
-      .map(x => x[i])
-      .filter(x => x !== undefined && x !== null);
+  while (true) {
+    let zipped = [];
+
+    for (let ch of channels) {
+      let {value, done} = ch.next();
+
+      if (done) {
+        return;
+      } else {
+        zipped.push(value)
+      }
+    }
+
+    yield zipped;
   }
 };
 

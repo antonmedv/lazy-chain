@@ -66,7 +66,7 @@ test('compose generators', t => {
 
   t.deepEqual(
     fx([1, 2, 3, 4, 5]).compose(double, negate).toArray(),
-    [ -2, -4, -6, -8, -10 ]
+    [-2, -4, -6, -8, -10]
   );
 });
 
@@ -80,4 +80,28 @@ test('length', t => {
 
 
   t.is(range(1, 10).filter(x => x % 2 == 0).length, 5);
+});
+
+test('next', t => {
+  let x = fx([1, 2, 3]);
+
+  t.deepEqual(
+    x.next(),
+    {value: 1, done: false}
+  );
+
+  t.deepEqual(
+    x.next(),
+    {value: 2, done: false}
+  );
+
+  t.deepEqual(
+    x.next(),
+    {value: 3, done: false}
+  );
+
+  t.deepEqual(
+    x.next(),
+    {value: undefined, done: true}
+  );
 });
