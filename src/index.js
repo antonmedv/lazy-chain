@@ -8,5 +8,14 @@ export * from './func';
  * @returns {Chain}
  */
 export function fx(...params) {
-  return new Chain(params.length === 1 ? params[0] : params);
+  if (params.length === 1) {
+
+    if (params[0] instanceof Chain) {
+      return params[0];
+    }
+
+    return new Chain(params[0]);
+  } else {
+    return new Chain(params);
+  }
 }

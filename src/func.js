@@ -1,5 +1,4 @@
-import {fx} from './index';
-import {compose} from './compose';
+import {fx, compose} from './index';
 
 /**
  * @param {*} obj
