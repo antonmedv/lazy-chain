@@ -3,7 +3,7 @@ set -ev
 PATH=node_modules/.bin:$PATH
 
 # Cleanup
-rm fx.js shim.js 2>/dev/null
+rm fx.js shim.js 2>/dev/null || true
 
 # Build ES6 package
 if [ "$1" == "--dev" ]; then
