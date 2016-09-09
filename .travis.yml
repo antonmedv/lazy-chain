@@ -1,5 +1,7 @@
 language: node_js
 sudo: false
+env:
+  - CXX=g++-4.8
 matrix:
   include:
   - node_js: "6"
@@ -16,3 +18,9 @@ script:
   - bin/test
 after_success:
   - npm run codecov
+addons:
+  apt:
+    sources:
+      - ubuntu-toolchain-r-test
+    packages:
+      - g++-4.8
