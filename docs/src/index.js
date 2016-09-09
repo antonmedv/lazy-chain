@@ -4,7 +4,8 @@ require('codemirror/lib/codemirror.css');
 //require('./spacegrey.scss');
 require('codemirror/mode/javascript/javascript');
 const CodeMirror = require('codemirror');
-const {fx, range} = require('fx/shim');
+const Fx = require('fx/shim');
+const {fx, range} = Fx;
 
 function isIterable(obj) {
   if (obj == null) { // checks for null and undefined
@@ -61,6 +62,14 @@ runNode.addEventListener('click', function (event) {
     }
   };
 
+  const require = (name) => {
+    if (name == 'fx') {
+      return Fx;
+    } else {
+      throw new Error(`Unknown module "${name}". Try to require "fx".`);
+    }
+  };
+
   try {
     let code = mirror.getValue();
 
@@ -68,14 +77,15 @@ runNode.addEventListener('click', function (event) {
       localStorage.setItem('repl_code', mirror.getValue());
     } catch (e) {}
 
-    code = `const result = do {${code}};`;
+    code = `const result = do {${code}
+    };`;
     code = Babel.transform(code, {presets: ['es2015', 'stage-0']}).code;
     code = `
       ${code}
       return result;
     `;
 
-    let output = new Function('fx', 'range', 'console', code)(fx, range, logger);
+    let output = new Function('fx', 'range', 'console', 'require', code)(fx, range, logger, require);
 
     logger.dump(output);
   } catch (e) {

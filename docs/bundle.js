@@ -51,11 +51,9 @@
 	//require('./spacegrey.scss');
 	__webpack_require__(3);
 	var CodeMirror = __webpack_require__(1);
-
-	var _require = __webpack_require__(2);
-
-	var fx = _require.fx;
-	var range = _require.range;
+	var Fx = __webpack_require__(2);
+	var fx = Fx.fx;
+	var range = Fx.range;
 
 
 	function isIterable(obj) {
@@ -113,6 +111,14 @@
 	    }
 	  };
 
+	  var require = function require(name) {
+	    if (name == 'fx') {
+	      return Fx;
+	    } else {
+	      throw new Error('Unknown module "' + name + '". Try to require "fx".');
+	    }
+	  };
+
 	  try {
 	    var code = mirror.getValue();
 
@@ -120,11 +126,11 @@
 	      localStorage.setItem('repl_code', mirror.getValue());
 	    } catch (e) {}
 
-	    code = 'const result = do {' + code + '};';
+	    code = 'const result = do {' + code + '\n    };';
 	    code = Babel.transform(code, { presets: ['es2015', 'stage-0'] }).code;
 	    code = '\n      ' + code + '\n      return result;\n    ';
 
-	    var output = new Function('fx', 'range', 'console', code)(fx, range, logger);
+	    var output = new Function('fx', 'range', 'console', 'require', code)(fx, range, logger, require);
 
 	    logger.dump(output);
 	  } catch (e) {
