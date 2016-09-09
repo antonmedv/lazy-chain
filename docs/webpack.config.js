@@ -3,10 +3,13 @@ const webpack = require('webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = {
-  entry: './src/index.js',
+  entry: {
+    bundle: './src/index.js',
+    worker: './src/worker.js'
+  },
   output: {
     path: __dirname,
-    filename: 'bundle.js'
+    filename: '[name].js'
   },
   plugins: [
     new webpack.optimize.OccurenceOrderPlugin(),
