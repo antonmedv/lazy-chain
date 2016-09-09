@@ -6,7 +6,7 @@
   "scripts": {
     "test": "bin/test",
     "report": "nyc report --reporter=html && open coverage/index.html",
-    "codecov": "nyc report --reporter=lcov > coverage.lcov && bash <(curl -s https://codecov.io/bash)",
+    "codecov": "nyc report --reporter=lcov > coverage.lcov && codecov",
     "prepublish": "bin/build"
   },
   "repository": {

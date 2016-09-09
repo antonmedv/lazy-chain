@@ -20,6 +20,7 @@ matrix:
     - CXX=g++-4.8
 install:
   - npm install
+  - npm install -g codecov
 script:
   - bin/test
 after_success:
