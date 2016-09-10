@@ -2,6 +2,7 @@ import {
   chunk,
   cycle,
   drop,
+  dropWhile,
   filter,
   flatten,
   map,
@@ -121,6 +122,14 @@ export class Chain {
    */
   drop(n = 1) {
     return this.apply(drop(n));
+  }
+
+  /**
+   * @param {Function} fn
+   * @returns {Chain}
+   */
+  dropWhile(fn) {
+    return this.apply(dropWhile(fn));
   }
 
   /**

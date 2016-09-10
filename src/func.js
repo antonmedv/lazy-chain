@@ -53,7 +53,7 @@ export const cycle = function*(iterator) {
  * @param {Number} n
  * @returns {Generator}
  */
-export const drop = (n = 1) => function *(iterator) {
+export const drop = (n = 1) => function*(iterator) {
   let i = 0;
 
   for (let value of iterator) {
@@ -61,6 +61,20 @@ export const drop = (n = 1) => function *(iterator) {
       yield value;
     }
   }
+};
+
+/**
+ * @param fn
+ * @returns {Generator}
+ */
+export const dropWhile = (fn) => function*(iterator) {
+  for (let value of iterator) {
+    if (!fn(value)) {
+      break;
+    }
+  }
+
+  yield* iterator;
 };
 
 /**
