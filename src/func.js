@@ -68,13 +68,17 @@ export const drop = (n = 1) => function*(iterator) {
  * @returns {Generator}
  */
 export const dropWhile = (fn) => function*(iterator) {
+  let dropped = false;
+
   for (let value of iterator) {
-    if (!fn(value)) {
-      break;
+    if(!dropped) {
+      if (!fn(value)) {
+        dropped = true;
+      }
+    } else {
+      yield value;
     }
   }
-
-  yield* iterator;
 };
 
 /**
