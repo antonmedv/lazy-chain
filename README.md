@@ -22,3 +22,6 @@ npm install fx
 * `fx/shim`: IE 9.x, Safari 9.x, Node 4.x
 
 
+### Documentation
+
+Try fx yourself in browser [fx.medv.io](http://fx.medv.io)
